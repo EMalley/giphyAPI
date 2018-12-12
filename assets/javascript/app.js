@@ -9,6 +9,7 @@ var topics = ["Jurassic Park", "Space", "Christmas", "Pugs", "Climbing"];
 var userInput = $("giphySearch").val()
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=jurrasic+park" + "&api_key=BgVoQX2k20CRJluSOkLWaY846Qub3ZzW&limit=10";
 
+
 //    FUNCTIONS
 // ==================================================
 // Grabs topics array and makes them into buttons. 
@@ -22,12 +23,13 @@ function displayButtons() {
         $("#buttonsForGifs").append(button);
     }
 };
-
+// displays gifs onto page
 function displayGifs() {
 $("#gifUpload").empty();
 var gif = $(this).attr("data-name");
 var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ gif + "&api_key=BgVoQX2k20CRJluSOkLWaY846Qub3ZzW&limit=10"
-// QueryURL function
+
+
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -37,10 +39,13 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ gif + "&api_key=BgVoQX
         for (var i = 0; i < results.length; i++) {
             var gifDiv = $("<div>");
             var rating = results[i].rating;
-            var p = $("<p>").text("rating: " + rating);
-            var gifImage = $("<img>");
-            gifImage.attr("src", results[i].images.fixed_height.url);
-            gifDiv.append(p);
+            var p = $("<span>").text("rating: " + rating);
+            var gifURL = results[i].images.original.url
+            var gifImage = $("<img src=" + gifURL + ">" );
+            gifImage.addClass("gifImage");
+            $(gifImage).attr("data-still" , gifURL)
+            $(gifImage).attr("data-animate", results[i].images.original.url)
+            gifDiv.prepend(p);
             gifDiv.append(gifImage);
             $("#gifUpload").append(gifDiv);
         }
@@ -48,13 +53,25 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ gif + "&api_key=BgVoQX
 
 }
 
+function animateAndStop () {
+    var state = $(this).attr("data-state")
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    } 
+    else{
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+};
+
 
 $(document).ready(function () {
     // Calling Functions and Methonds
     // ======================================================
     displayButtons();
-    displayGifs()
-  
+    displayGifs();
+
 
     // click Listener for buttons/ adds new gif buttons to array
     $("#submitBtn").on("click", function () {
@@ -63,11 +80,7 @@ $(document).ready(function () {
         displayButtons()
     });
 
-
-
-
-
-
-
+$(document).on("click", ".gifbutton", displayGifs);
+$(document).on("click", ".gifImage", animateAndStop);
 })
 
