@@ -42,6 +42,7 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ gif + "&api_key=BgVoQX
             gifImage.attr("src", results[i].images.fixed_height.url);
             gifDiv.append(p);
             gifDiv.append(gifImage);
+            $("#gifUpload").append(gifDiv);
         }
     });
 
