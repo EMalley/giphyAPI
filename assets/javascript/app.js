@@ -40,7 +40,7 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ gif + "&api_key=BgVoQX
             var gifDiv = $("<div>");
             var rating = results[i].rating;
             var p = $("<span>").text("rating: " + rating);
-            var gifURL = results[i].images.original.url
+            var gifURL = results[i].images.original_still.url
             var gifImage = $("<img src=" + gifURL + ">" );
             gifImage.addClass("gifImage");
             $(gifImage).attr("data-still" , gifURL)
