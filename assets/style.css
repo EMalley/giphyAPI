@@ -1,8 +1,68 @@
+body {
+background-color: grey
+}
+
+.jumbotron {
+background-color: grey
+}
+
+h1{
+    font-family: fantasy;
+    -webkit-text-stroke: 1px #e84118
+}
+
 img {width: 175px;
     height:175px;
-    display:inline-flex;
+}
+
+#giphySearch {
+    background: #2f3640;
+    color:#fff;
+    height:40px;
+    border-radius: 40px;
+    padding:10px;
+}
+
+#giphySearch:focus {
+    outline: none;
+}
+
+#submitBtn {
+    color:#e84118;
+    width:40px;
+    height:40px; 
+    border-radius: 40px;
+    background:#2f3640; 
+    justify-content: center;
+    align-items: center;
+}
+
+.gifImage { 
+    align-content: center;
 }
 
 #gifUpload {
-    align-content: space-around;
+    align-content: space-around; 
+}
+
+.gifButton {
+    outline: none;
+    border: 2px solid #e84118;
+    text-align: center;
+    font-size: 18;
+    display: inline-block;
+    border-radius: 8px;
+    margin: 3.5px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.gifButton:hover {
+    background-color: #000;
+    color:#fff;
+    transition: .4s;
+}
+
+.gifBUtton:focus {
+    outline:none;
 }
